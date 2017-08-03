@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c && node build/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "rollup": "^0.45.2",
+    "rollup-plugin-json": "^2.3.0",
+    "snoowrap": "^1.14.1"
+  }
+}
