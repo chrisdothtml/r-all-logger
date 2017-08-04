@@ -703,6 +703,10 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
+tocktimer@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/tocktimer/-/tocktimer-1.0.12.tgz#d93acd8ef966b317c91be792f27d43d69e6542eb"
+
 tough-cookie@~2.3.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"

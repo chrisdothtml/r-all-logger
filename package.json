@@ -13,6 +13,7 @@
     "mongoose": "^4.11.5",
     "rollup": "^0.45.2",
     "rollup-plugin-json": "^2.3.0",
-    "snoowrap": "^1.14.1"
+    "snoowrap": "^1.14.1",
+    "tocktimer": "^1.0.12"
   }
 }

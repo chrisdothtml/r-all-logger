@@ -1,14 +1,12 @@
 import connect from './connect.js'
 import dotenv from 'dotenv'
 import { parsePost } from './utils.js'
+import Tock from 'tocktimer'
 
 // load environment vars
 dotenv.load()
 
 const { reddit } = connect()
-const FIVE_MINS = 5 * 60 * 1000
-const ONE_HOUR = FIVE_MINS * 12
-let LAST_FETCH
 
 reddit
   .getSubreddit('all')
@@ -17,15 +15,14 @@ reddit
     //
   })
 
-// check if an hour has passed every 5 minutes
-setTimeout(() => {
-  let shouldFetch = true
-
-  if (LAST_FETCH) {
-    //
+const timer = new Tock({
+  callback: () => {
+    fetchPosts()
+      .then(() => { console.log(`/r/all posts saved at ${new Date().toString()}`) })
+      .catch(console.error)
   }
+})
 
-  if (shouldFetch) {
-    //
-  }
-}, FIVE_MINS)
+// run every hour
+timer.interval = timer.timeToMS('01:00:00')
+timer.start()
