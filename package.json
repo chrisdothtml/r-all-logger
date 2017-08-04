@@ -1,6 +1,9 @@
 {
   "private": true,
   "version": "0.0.1",
+  "engines": {
+    "node": ">=8.2.0 <9"
+  },
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c && node build/index.js"

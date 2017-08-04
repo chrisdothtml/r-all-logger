@@ -8,6 +8,7 @@ function getExternals () {
 export default {
   entry: 'src/index.js',
   format: 'cjs',
+  preferConst: true,
   dest: 'build/index.js',
   external: getExternals(),
   plugins: [

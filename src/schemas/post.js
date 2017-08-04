@@ -11,4 +11,6 @@ export default new Schema({
   post_subreddit: String,
   post_title: String,
   post_url: String
+}, {
+  timestamps: true
 })
