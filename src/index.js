@@ -1,19 +1,10 @@
-import connect from './connect.js'
 import dotenv from 'dotenv'
-import { parsePost } from './utils.js'
+import fetchPosts from './fetch-posts.js'
+import initialize from './init.js'
 import Tock from 'tocktimer'
 
-// load environment vars
 dotenv.load()
-
-const { reddit } = connect()
-
-reddit
-  .getSubreddit('all')
-  .getHot()
-  .then(posts => {
-    //
-  })
+initialize()
 
 const timer = new Tock({
   callback: () => {
