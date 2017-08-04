@@ -1,34 +1,31 @@
-// import connect from './connect.js'
+import connect from './connect.js'
 import dotenv from 'dotenv'
-import fs from 'fs'
-import * as postUtils from './posts.js'
-import { join } from 'path'
-import { promisify } from 'util'
+import { parsePost } from './utils.js'
 
 // load environment vars
 dotenv.load()
 
-const writeFile = promisify(fs.writeFile)
-// const reddit = connect()
+const { reddit } = connect()
+const FIVE_MINS = 5 * 60 * 1000
+const ONE_HOUR = FIVE_MINS * 12
+let LAST_FETCH
 
-// reddit
-//   .getSubreddit('all')
-//   .getHot()
-//   .then(async posts => {
-//     await writeFile(
-//       join(__dirname, '../results.json'),
-//       JSON.stringify(posts, null, 4)
-//     )
-//   })
+reddit
+  .getSubreddit('all')
+  .getHot()
+  .then(posts => {
+    //
+  })
 
-async function testParser (posts) {
-  posts = posts.map(postUtils.parse)
+// check if an hour has passed every 5 minutes
+setTimeout(() => {
+  let shouldFetch = true
 
-  await writeFile(
-    join(__dirname, '../parsed.json'),
-    JSON.stringify(posts, null, 2)
-  )
-}
+  if (LAST_FETCH) {
+    //
+  }
 
-testParser(require('../results.json'))
-  .catch(console.error)
+  if (shouldFetch) {
+    //
+  }
+}, FIVE_MINS)
