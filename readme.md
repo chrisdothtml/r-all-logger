@@ -12,3 +12,7 @@
 - train a neural net with the /r/all frontpages posts
 - use it to predict what subreddit, type of post (?), etc. based on the day of the week and time you want to post it on
 - see how accurate it is
+
+### stuff to consider
+
+- if 2 posts are on the frontpage on the same day and posted at the same time, whichever has the bigger points score (upvotes) should be considered more successful (neural net will need to be aware of this; no idea how to do that)
