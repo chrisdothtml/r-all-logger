@@ -17,8 +17,8 @@ const timer = new Tock({
   }
 })
 
-// run every minute
-timer.interval = timer.timeToMS('00:01:00')
+// run every half hour
+timer.interval = timer.timeToMS('00:30:00')
 timer.start()
 
 // pointless server to stop heroku from fucking crashing
