@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import express from 'express'
 import fetchPosts from './fetch-posts.js'
 import initialize from './init.js'
 import Tock from 'tocktimer'
@@ -6,6 +7,8 @@ import Tock from 'tocktimer'
 dotenv.load()
 initialize()
 
+const PORT = process.env.PORT || 1337
+const app = express()
 const timer = new Tock({
   callback: () => {
     fetchPosts()
@@ -17,3 +20,8 @@ const timer = new Tock({
 // run every minute
 timer.interval = timer.timeToMS('00:01:00')
 timer.start()
+
+// pointless server to stop heroku from fucking crashing
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}...`)
+})
