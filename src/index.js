@@ -14,6 +14,6 @@ const timer = new Tock({
   }
 })
 
-// run every hour
-timer.interval = timer.timeToMS('01:00:00')
+// run every minute
+timer.interval = timer.timeToMS('00:01:00')
 timer.start()
