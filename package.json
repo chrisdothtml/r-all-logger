@@ -8,7 +8,9 @@
     "build-fetcher": "BUILD=fetcher rollup -c",
     "build-server": "BUILD=server rollup -c",
     "start-fetcher": "yarn build-fetcher && node build/fetcher.js",
-    "start-server": "yarn build-server && node build/server.js"
+    "start-fetcher-w": "nodemon --watch src --exec 'yarn start-fetcher'",
+    "start-server": "yarn build-server && node build/server.js",
+    "start-server-w": "nodemon --watch src --exec 'yarn start-server'"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
@@ -19,5 +21,8 @@
     "rollup-plugin-json": "^2.3.0",
     "snoowrap": "^1.14.1",
     "tocktimer": "^1.0.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
