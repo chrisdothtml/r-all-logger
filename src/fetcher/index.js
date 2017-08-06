@@ -1,9 +1,7 @@
-import dotenv from 'dotenv'
 import fetchPosts from './fetch-posts.js'
 import initialize from './init.js'
 import Tock from 'tocktimer'
 
-dotenv.load()
 initialize()
 
 const timer = new Tock({

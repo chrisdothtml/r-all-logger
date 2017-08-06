@@ -1,11 +1,8 @@
-import dotenv from 'dotenv'
+import env from '../env.js'
 import Koa from 'koa'
 import serve from 'koa-static'
 
-// local env vars
-dotenv.load()
-
-const PORT = process.env.PORT || 1337
+const { PORT } = env.get()
 const PUBLIC_PATH = './public'
 const server = new Koa()
 
