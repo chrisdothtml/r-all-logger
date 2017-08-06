@@ -5,7 +5,7 @@ dotenv.load()
 
 let cache
 
-export function get () {
+function get () {
   if (!cache) {
     const {
       CLIENT_ID,
@@ -25,4 +25,8 @@ export function get () {
   }
 
   return cache
+}
+
+export default {
+  get
 }
