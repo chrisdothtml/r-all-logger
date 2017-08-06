@@ -5,8 +5,10 @@
     "node": ">=8.2.0 <9"
   },
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c && node build/index.js"
+    "build-fetcher": "BUILD=fetcher rollup -c",
+    "build-server": "BUILD=server rollup -c",
+    "start-fetcher": "yarn build-fetcher && node build/fetcher.js",
+    "start-server": "yarn build-server && node build/server.js"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
