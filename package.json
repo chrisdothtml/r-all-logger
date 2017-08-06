@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "dotenv": "^4.0.0",
-    "express": "^4.15.3",
+    "koa": "^2.3.0",
+    "koa-static": "^4.0.1",
     "mongoose": "^4.11.5",
     "rollup": "^0.45.2",
     "rollup-plugin-json": "^2.3.0",
