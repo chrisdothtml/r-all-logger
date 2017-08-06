@@ -15,6 +15,7 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "koa": "^2.3.0",
+    "koa-route": "^3.2.0",
     "koa-static": "^4.0.1",
     "mongoose": "^4.11.5",
     "rollup": "^0.45.2",
