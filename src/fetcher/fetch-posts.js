@@ -1,8 +1,20 @@
 import store from '../store.js'
 import { promisify } from 'util'
 
+const FIELDS = [
+  'author',
+  'created_utc',
+  'id',
+  'num_comments',
+  'permalink',
+  'preview',
+  'score',
+  'subreddit',
+  'title',
+  'url'
+]
+
 function parsePost (post) {
-  const FIELDS = ['author', 'created_utc', 'id', 'num_comments', 'permalink', 'preview', 'score', 'subreddit', 'title', 'url']
   const result = {}
 
   FIELDS.forEach(key => {
