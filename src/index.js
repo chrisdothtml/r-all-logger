@@ -10,7 +10,7 @@ initialize()
 const PORT = process.env.PORT || 1337
 const app = express()
 const timer = new Tock({
-  callback: () => {
+  callback () {
     fetchPosts()
       .then(() => { console.log(`/r/all posts saved at ${new Date().toString()}`) })
       .catch(console.error)
