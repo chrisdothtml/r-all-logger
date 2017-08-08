@@ -19,6 +19,5 @@
 
 ### TODO
 
-- list subreddits in order of how many /r/all posts came from them
 - list posts in order of points with title/permalink/author
-- list authors in order of how many /r/all posts they have
+- build out UI design
