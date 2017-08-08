@@ -7,21 +7,13 @@ let cache
 
 function get () {
   if (!cache) {
-    const {
-      CLIENT_ID,
-      CLIENT_SECRET,
-      MONGODB_URI,
-      PORT,
-      REFRESH_TOKEN
-    } = process.env
+    const { MONGODB_URI, NODE_ENV, PORT } = process.env
 
-    cache = {
-      CLIENT_ID,
-      CLIENT_SECRET,
+    cache = Object.assign(process.env, {
       MONGODB_URI: MONGODB_URI || 'mongodb://localhost:27017',
-      PORT: PORT || 1337,
-      REFRESH_TOKEN
-    }
+      NODE_ENV: NODE_ENV || 'development',
+      PORT: PORT || 1337
+    })
   }
 
   return cache
