@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import router from 'koa-route'
 import serve from 'koa-static'
 import { getPosts } from './api.js'
+import '../handle-exit.js'
 
 const { MONGODB_URI, NODE_ENV, PORT } = env.get()
 const PUBLIC_PATH = './public'

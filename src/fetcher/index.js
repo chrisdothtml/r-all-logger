@@ -1,6 +1,7 @@
 import fetchPosts from './fetch-posts.js'
 import initialize from './init.js'
 import Tock from 'tocktimer'
+import '../handle-exit.js'
 
 function startFetcher () {
   const timer = new Tock({
