@@ -11,6 +11,7 @@ const { MONGODB_URI, NODE_ENV, PORT } = env.get()
 const PUBLIC_PATH = './public'
 const server = new Koa()
 
+// TODO: find out why this is causing /api/posts to get 401
 if (NODE_ENV === 'production') {
   const { AUTH_USER, AUTH_PASS } = env.get()
 
