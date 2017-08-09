@@ -16,11 +16,11 @@
     const fields = {
       post_author: {
         counts: {},
-        title: 'Authors'
+        title: 'Top 20 Authors'
       },
       post_subreddit: {
         counts: {},
-        title: 'Subreddits'
+        title: 'Top 20 Subreddits'
       }
     }
     let result = ''
@@ -51,6 +51,7 @@
           if (a.count < b.count)
             return 1
         })
+        .slice(0, 19)
         .map(({ count, name }) => `<li>${name} (${count} posts)</li>`)
         .join('\n')
 
@@ -67,13 +68,9 @@
 
   async function init () {
     const posts = await getPosts()
-    const listsHTML = getListsHTML(posts)
 
     BODY.classList.remove('loading')
-    ELEM.innerHTML = `
-      <span>There are ${posts.length} posts in the db</span>
-      ${listsHTML}
-    `
+    ELEM.innerHTML = getListsHTML(posts)
   }
 
   init().catch(console.error)
