@@ -1,4 +1,4 @@
-import auth from 'basic-auth'
+import auth from './auth.js'
 import env from '../env.js'
 import Koa from 'koa'
 import mongoose from 'mongoose'
@@ -11,27 +11,8 @@ const { MONGODB_URI, NODE_ENV, PORT } = env.get()
 const PUBLIC_PATH = './public'
 const server = new Koa()
 
-// TODO: find out why this is causing /api/posts to get 401
 if (NODE_ENV === 'production') {
-  const { AUTH_USER, AUTH_PASS } = env.get()
-
-  server.use(async (ctx, next) => {
-    let isAuthorized
-
-    try {
-      const user = auth(ctx)
-      isAuthorized = user.name === AUTH_USER && user.pass === AUTH_PASS
-    } catch (error) {
-      isAuthorized = false
-    }
-
-    if (isAuthorized) {
-      return next()
-    } else {
-      ctx.set('WWW-Authenticate', 'Basic')
-      ctx.status = 401
-    }
-  })
+  server.use(auth)
 }
 
 server.use(
