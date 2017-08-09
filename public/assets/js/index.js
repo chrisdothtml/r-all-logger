@@ -5,7 +5,10 @@
   const { keys } = Object
 
   async function getPosts () {
-    const response = await fetch('/api/posts')
+    const response = await fetch('/api/posts', {
+      credentials: 'same-origin'
+    })
+
     return response.json()
   }
 
