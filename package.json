@@ -18,7 +18,7 @@
     "koa": "^2.3.0",
     "koa-route": "^3.2.0",
     "koa-static": "^4.0.1",
-    "mongoose": "^4.11.5",
+    "mongoose": "4.10.8",
     "rollup": "^0.45.2",
     "rollup-plugin-json": "^2.3.0",
     "snoowrap": "^1.14.1",
