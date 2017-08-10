@@ -41,7 +41,7 @@
     // generate html
     keys(fields).forEach(key => {
       const { counts, title } = fields[key]
-      let html = keys(counts)
+      let listItems = keys(counts)
         .map(key => ({ name: key, count: counts[key] }))
         .sort((a, b) => {
           if (a.count > b.count)
@@ -51,15 +51,17 @@
           if (a.count < b.count)
             return 1
         })
-        .slice(0, 19)
-        .map(({ count, name }) => `<li>${name} (${count} posts)</li>`)
+        .slice(0, 20)
+        .map(({ count, name }) => `<li class="list-item">${name} (${count})</li>`)
         .join('\n')
 
       result += `
-        <h2>${title}</h2>
-        <ul>
-          ${html}
-        </ul>
+        <div class="card">
+          <h2 class="card-heading">${title}</h2>
+          <ul class="card-list">
+            ${listItems}
+          </ul>
+        </div>
       `
     })
 
@@ -70,7 +72,11 @@
     const posts = await getPosts()
 
     BODY.classList.remove('loading')
-    ELEM.innerHTML = getListsHTML(posts)
+    ELEM.innerHTML = `
+      <div class="contain">
+        ${getListsHTML(posts)}
+      </div>
+    `
   }
 
   init().catch(console.error)

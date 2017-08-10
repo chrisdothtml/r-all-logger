@@ -1,0 +1,20 @@
+.header {
+  margin-bottom: 20px;
+  padding: 30px 0;
+}
+
+.header .header-logo {
+  --logo-color: #9fc2d4;
+  align-items: center;
+  display: flex;
+  color: var(--logo-color);
+}
+
+.header-logo .logo-img {
+  margin-right: 15px;
+  width: 35px;
+}
+
+.header-logo .logo-text {
+  font-weight: 500;
+}

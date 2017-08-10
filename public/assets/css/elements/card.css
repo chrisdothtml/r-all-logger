@@ -1,0 +1,33 @@
+.card {
+  --color-heading: var(--color-text-secondary);
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 45px 0 rgba(0, 0, 0, .1);
+  color: #81959e;
+  padding: 35px 45px;
+}
+
+.card .card-heading {
+  border-bottom: 1px solid #f2f5f9;
+  color: var(--color-heading);
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  text-transform: uppercase;
+}
+
+.card .card-list {
+  --item-spacing: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  margin-bottom: calc(-1 * var(--item-spacing));
+}
+
+.card-list .list-item {
+  font-size: 14px;
+  margin-bottom: var(--item-spacing);
+  width: 49%;
+}

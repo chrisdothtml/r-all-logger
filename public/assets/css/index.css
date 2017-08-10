@@ -1,3 +1,25 @@
-@import 'https://fonts.googleapis.com/css?family=Roboto:400,700';
+@import 'https://fonts.googleapis.com/css?family=Roboto:400,500,700';
 @import './vars.css';
 @import './reset.css';
+@import './elements/header.css';
+@import './elements/card.css';
+
+body {
+  background: #eaeef4;
+  overflow: auto;
+  position: relative;
+}
+
+.contain {
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.main-content .contain {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content .card {
+  width: 48%;
+}
