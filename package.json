@@ -5,7 +5,8 @@
     "node": ">=8.2.0 <9"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "yarn lint && rollup -c",
+    "lint": "standard --verbose | snazzy '**/*.js'",
     "start-fetcher": "BUILD=fetcher yarn build && node build/fetcher.js",
     "start-fetcher-w": "nodemon --watch src --exec 'yarn start-fetcher'",
     "start-server": "BUILD=server yarn build && node build/server.js",
@@ -20,7 +21,9 @@
     "mongoose": "4.10.8",
     "rollup": "^0.45.2",
     "rollup-plugin-json": "^2.3.0",
+    "snazzy": "^7.0.0",
     "snoowrap": "^1.14.1",
+    "standard": "^10.0.3",
     "tocktimer": "^1.0.12"
   },
   "devDependencies": {
