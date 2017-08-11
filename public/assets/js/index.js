@@ -2,14 +2,52 @@
   const doc = window.document
   const BODY = doc.body
   const ELEM = doc.getElementById('content')
+  const CACHE_LIFETIME = (1000 * 60) * 30
+  const CACHE_KEY = 'r-all-logger'
   const { keys } = Object
+  const { fetch, localStorage } = window
+
+  function cachePosts (posts) {
+    if (posts) {
+      const cache = JSON.stringify({
+        data: posts,
+        timestamp: Date.now()
+      })
+
+      localStorage.setItem(CACHE_KEY, cache)
+    }
+  }
+
+  function getCachedPosts () {
+    const cache = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}')
+    const hasExpired = (Date.now() - cache.timestamp) >= CACHE_LIFETIME
+    let result
+
+    if (cache.data && !hasExpired) {
+      result = cache.data
+    }
+
+    return result
+  }
 
   async function getPosts () {
-    const response = await fetch('/api/posts', {
-      credentials: 'same-origin'
-    })
+    const cachedPosts = getCachedPosts()
+    let result
 
-    return response.json()
+    if (cachedPosts) {
+      result = cachedPosts
+    } else {
+      const response = await fetch('/api/posts', {
+        credentials: 'same-origin'
+      })
+
+      result = await response.json()
+      setTimeout(() => {
+        cachePosts(result)
+      }, 0)
+    }
+
+    return result
   }
 
   function getListsHTML (posts) {
@@ -44,12 +82,14 @@
       let listItems = keys(counts)
         .map(key => ({ name: key, count: counts[key] }))
         .sort((a, b) => {
+          /* eslint-disable curly */
           if (a.count > b.count)
             return -1
           if (a.count === b.count)
             return a.name > b.name ? 1 : -1
           if (a.count < b.count)
             return 1
+          /* eslint-enable curly */
         })
         .slice(0, 20)
         .map(({ count, name }) => `<li class="list-item">${name} (${count})</li>`)
