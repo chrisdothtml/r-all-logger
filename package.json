@@ -5,11 +5,10 @@
     "node": ">=8.2.0 <9"
   },
   "scripts": {
-    "build-fetcher": "BUILD=fetcher rollup -c",
-    "build-server": "BUILD=server rollup -c",
-    "start-fetcher": "yarn build-fetcher && node build/fetcher.js",
+    "build": "rollup -c",
+    "start-fetcher": "BUILD=fetcher yarn build && node build/fetcher.js",
     "start-fetcher-w": "nodemon --watch src --exec 'yarn start-fetcher'",
-    "start-server": "yarn build-server && node build/server.js",
+    "start-server": "BUILD=server yarn build && node build/server.js",
     "start-server-w": "nodemon --watch src --exec 'yarn start-server'"
   },
   "dependencies": {
