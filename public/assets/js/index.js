@@ -79,11 +79,11 @@
     const fields = {
       post_author: {
         counts: {},
-        title: 'Top 20 Authors'
+        title: 'Top 10 Authors'
       },
       post_subreddit: {
         counts: {},
-        title: 'Top 20 Subreddits'
+        title: 'Top 10 Subreddits'
       }
     }
     let result = ''
@@ -116,7 +116,7 @@
             return 1
           /* eslint-enable curly */
         })
-        .slice(0, 20)
+        .slice(0, 10)
         .map(({ count, name }) => `<li class="list-item">${name} (${count})</li>`)
         .join('\n')
 
