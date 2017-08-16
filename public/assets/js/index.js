@@ -121,7 +121,7 @@
         .join('\n')
 
       result += `
-        <div class="card">
+        <div class="card card_half">
           <h2 class="card-heading">${title}</h2>
           <ul class="card-list">
             ${listItems}
@@ -133,6 +133,14 @@
     return result
   }
 
+  function getSRChartHTML (posts) {
+    return `
+      <div class="card">
+        <h2 class="card-heading">Subreddits</h2>
+      </div>
+    `
+  }
+
   async function init () {
     const posts = await getPosts()
 
@@ -141,6 +149,7 @@
     CONTENT.innerHTML = `
       <div class="contain">
         ${getListsHTML(posts)}
+        ${getSRChartHTML(posts)}
       </div>
     `
   }

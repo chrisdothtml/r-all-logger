@@ -17,9 +17,14 @@ body {
 
 .main-content .contain {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .main-content .card {
+  margin-bottom: 45px;
+}
+
+.main-content .card_half {
   width: 48%;
 }
