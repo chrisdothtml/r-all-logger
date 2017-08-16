@@ -1,7 +1,8 @@
 {
   const doc = window.document
   const BODY = doc.body
-  const ELEM = doc.getElementById('content')
+  const CONTENT = doc.getElementById('content')
+  const EXPORT_BTN = doc.getElementById('export-btn')
   const CACHE_LIFETIME = (1000 * 60) * 30
   const CACHE_KEY = 'r-all-logger'
   const { keys } = Object
@@ -48,6 +49,30 @@
     }
 
     return result
+  }
+
+  function createAndDownload (filename, content) {
+    var el = document.createElement('a')
+
+    el.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(content)}`)
+    el.setAttribute('download', filename)
+    el.click()
+  }
+
+  function exportPosts (posts) {
+    return () => {
+      const fields = ['_id', 'createdAt', 'post_created_utc', 'post_num_comments', 'post_score', 'post_subreddit']
+      let result = fields.join(',')
+
+      posts.forEach(post => {
+        const values = []
+
+        fields.forEach(field => values.push(post[field]))
+        result += '\n' + values.join(',')
+      })
+
+      createAndDownload(`posts-${new Date().getTime()}.csv`, result)
+    }
   }
 
   function getListsHTML (posts) {
@@ -112,7 +137,8 @@
     const posts = await getPosts()
 
     BODY.classList.remove('loading')
-    ELEM.innerHTML = `
+    EXPORT_BTN.addEventListener('click', exportPosts(posts))
+    CONTENT.innerHTML = `
       <div class="contain">
         ${getListsHTML(posts)}
       </div>
