@@ -1,3 +1,4 @@
+/* global Chart */
 {
   const doc = window.document
   const BODY = doc.body
@@ -146,7 +147,7 @@
     const labels = counts.map(item => `/r/${item.name}`)
     const points = counts.map(item => item.count)
 
-    new Chart(ctx, {
+    new Chart(ctx, {// eslint-disable-line no-new
       type: 'line',
       data: {
         labels: labels,
@@ -154,7 +155,7 @@
           backgroundColor: '#3498db',
           borderColor: '#3498db',
           data: points,
-          fill: false,
+          fill: false
         }]
       },
       options: {
@@ -164,7 +165,7 @@
         },
         tooltips: {
           mode: 'index',
-          intersect: false,
+          intersect: false
         },
         hover: {
           mode: 'nearest',
