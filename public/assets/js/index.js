@@ -1,7 +1,8 @@
 {
   const doc = window.document
   const BODY = doc.body
-  const CONTENT = doc.getElementById('content')
+  const TOPS = doc.getElementById('tops')
+  const SR_CHART = doc.querySelector('#sr-chart canvas')
   const EXPORT_BTN = doc.getElementById('export-btn')
   const CACHE_LIFETIME = (1000 * 60) * 30
   const CACHE_KEY = 'r-all-logger'
@@ -102,7 +103,7 @@
       })
   }
 
-  function getListsHTML (posts) {
+  function getTopsHTML (posts) {
     const fields = {
       post_author: {
         counts: getCounts(posts, 'post_author'),
@@ -139,12 +140,50 @@
     return result
   }
 
-  function getSRChartHTML (posts) {
-    return `
-      <div class="card">
-        <h2 class="card-heading">Subreddits</h2>
-      </div>
-    `
+  function initSRChart (el, posts) {
+    const counts = getCounts(posts, 'post_subreddit')
+    const ctx = el.getContext('2d')
+    const labels = counts.map(item => `/r/${item.name}`)
+    const points = counts.map(item => item.count)
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          backgroundColor: '#3498db',
+          borderColor: '#3498db',
+          data: points,
+          fill: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        legend: {
+          display: false
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            display: false
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Post Count'
+            }
+          }]
+        }
+      }
+    })
   }
 
   async function init () {
@@ -152,12 +191,12 @@
 
     BODY.classList.remove('loading')
     EXPORT_BTN.addEventListener('click', exportPosts(posts))
-    CONTENT.innerHTML = `
+    TOPS.innerHTML = `
       <div class="contain">
-        ${getListsHTML(posts)}
-        ${getSRChartHTML(posts)}
+        ${getTopsHTML(posts)}
       </div>
     `
+    initSRChart(SR_CHART, posts)
   }
 
   init().catch(console.error)
