@@ -3,6 +3,12 @@
   padding: 30px 0;
 }
 
+.header .contain {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 .header .header-logo {
   --logo-color: #9fc2d4;
   align-items: center;
@@ -17,4 +23,29 @@
 
 .header-logo .logo-text {
   font-weight: 500;
+}
+
+.header-export .export-btn {
+  align-items: center;
+  background-color: var(--color-green);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  opacity: 1;
+  padding: 15px 20px;
+  transition: opacity var(--speed-normal);
+}
+
+.header-export .export-btn:hover {
+  opacity: .8;
+}
+
+.header-export .export-btn:focus {
+  opacity: 1;
+}
+
+.header-export .export-btn span {
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
 }

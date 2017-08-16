@@ -35,6 +35,15 @@ a:hover {
   text-decoration: underline;
 }
 
+button {
+  background: transparent;
+  border: 0;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 hr {
   background-color: var(--color-text);
   border: 0;
