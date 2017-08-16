@@ -75,49 +75,55 @@
     }
   }
 
+  function getCounts (posts, field) {
+    const counts = {}
+
+    posts.forEach(post => {
+      const value = post[field]
+
+      if (counts[value]) {
+        counts[value]++
+      } else {
+        counts[value] = 1
+      }
+    })
+
+    return keys(counts)
+      .map(key => ({ name: key, count: counts[key] }))
+      .sort((a, b) => {
+        /* eslint-disable curly */
+        if (a.count > b.count)
+          return -1
+        if (a.count === b.count)
+          return a.name > b.name ? 1 : -1
+        if (a.count < b.count)
+          return 1
+        /* eslint-enable curly */
+      })
+  }
+
   function getListsHTML (posts) {
     const fields = {
       post_author: {
-        counts: {},
+        counts: getCounts(posts, 'post_author'),
         title: 'Top 10 Authors'
       },
       post_subreddit: {
-        counts: {},
+        counts: getCounts(posts, 'post_subreddit'),
         title: 'Top 10 Subreddits'
       }
     }
     let result = ''
 
-    // calculate counts
-    posts.forEach(post => {
-      keys(fields).forEach(key => {
-        const value = key === 'post_subreddit' ? `/r/${post[key]}` : post[key]
-
-        if (fields[key].counts[value]) {
-          fields[key].counts[value]++
-        } else {
-          fields[key].counts[value] = 1
-        }
-      })
-    })
-
     // generate html
     keys(fields).forEach(key => {
       const { counts, title } = fields[key]
-      let listItems = keys(counts)
-        .map(key => ({ name: key, count: counts[key] }))
-        .sort((a, b) => {
-          /* eslint-disable curly */
-          if (a.count > b.count)
-            return -1
-          if (a.count === b.count)
-            return a.name > b.name ? 1 : -1
-          if (a.count < b.count)
-            return 1
-          /* eslint-enable curly */
-        })
+      let listItems = counts
         .slice(0, 10)
-        .map(({ count, name }) => `<li class="list-item">${name} (${count})</li>`)
+        .map(({ count, name }) => {
+          name = key === 'post_subreddit' ? `/r/${name}` : name
+          return `<li class="list-item">${name} (${count})</li>`
+        })
         .join('\n')
 
       result += `
