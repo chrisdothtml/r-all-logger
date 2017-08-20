@@ -6,7 +6,7 @@ async function init (element) {
   const posts = await getPosts()
   const counts = countPostsField(posts, 'post_subreddit')
   const ctx = element.getContext('2d')
-  const labels = counts.map(item => `/r/${item.name}`)
+  const labels = counts.map(item => item.name)
   const points = counts.map(item => item.count)
 
   new Chart(ctx, {// eslint-disable-line no-new
