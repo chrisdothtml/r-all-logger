@@ -1,24 +1,42 @@
+import fs from 'fs'
 import router from 'koa-route'
 import store from '../../store.js'
 import { rollup } from 'rollup'
 import { join } from 'path'
+import { promisify } from 'util'
 
-const cache = store.cache.rollup
-const config = {
+const ROLLUP_CACHE = store.cache.rollup
+const CONFIG = {
   format: 'iife',
   sourceMap: 'inline'
 }
 
+async function fileExists (path) {
+  const absPath = join(process.cwd(), path)
+  let result = true
+
+  try {
+    await promisify(fs.access)(absPath)
+  } catch (error) {
+    if (error) {
+      result = false
+    }
+  }
+
+  return result
+}
+
 export default function serveJS (PUBLIC_PATH) {
   return router.get('**/*.js', async ctx => {
-    const FILE_PATH = join(PUBLIC_PATH, ctx.path)
-    const bundle = await rollup({
-      cache: cache[FILE_PATH],
-      entry: FILE_PATH
-    })
-    const output = await bundle.generate(config)
+    const entry = join(PUBLIC_PATH, ctx.path)
 
-    cache[FILE_PATH] = bundle
-    ctx.body = output.code
+    if (await fileExists(entry)) {
+      const cache = ROLLUP_CACHE[entry]
+      const bundle = await rollup({ cache, entry })
+      const output = await bundle.generate(CONFIG)
+
+      ROLLUP_CACHE[entry] = bundle
+      ctx.body = output.code
+    }
   })
 }
