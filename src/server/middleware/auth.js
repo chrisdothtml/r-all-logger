@@ -1,5 +1,5 @@
 import auth from 'basic-auth'
-import env from '../env.js'
+import env from '../../env.js'
 
 export default async function handleAuth (ctx, next) {
   const { AUTH_USER, AUTH_PASS } = env.get()

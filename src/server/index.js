@@ -1,7 +1,7 @@
-import auth from './auth.js'
 import env from '../env.js'
 import Koa from 'koa'
 import mongoose from 'mongoose'
+import mwAuth from './middleware/auth.js'
 import router from 'koa-route'
 import serve from 'koa-static'
 import { getPosts } from './api.js'
@@ -12,7 +12,7 @@ const PUBLIC_PATH = './public'
 const server = new Koa()
 
 if (NODE_ENV === 'production') {
-  server.use(auth)
+  server.use(mwAuth)
 }
 
 server.use(
