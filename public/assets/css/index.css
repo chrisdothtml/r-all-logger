@@ -5,7 +5,7 @@
 @import './elements/card.css';
 
 body {
-  background: ##ecf0f1;
+  background-color: var(--color-bg);
   overflow: auto;
   position: relative;
 }
