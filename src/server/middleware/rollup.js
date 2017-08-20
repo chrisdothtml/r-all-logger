@@ -8,7 +8,7 @@ import { promisify } from 'util'
 const ROLLUP_CACHE = store.cache.rollup
 const CONFIG = {
   format: 'iife',
-  sourceMap: 'inline'
+  sourceMap: true
 }
 
 async function fileExists (path) {
@@ -32,11 +32,16 @@ export default function serveJS (PUBLIC_PATH) {
 
     if (await fileExists(entry)) {
       const cache = ROLLUP_CACHE[entry]
-      const bundle = await rollup({ cache, entry })
-      const output = await bundle.generate(CONFIG)
 
-      ROLLUP_CACHE[entry] = bundle
-      ctx.body = output.code
+      try {
+        const bundle = await rollup({ cache, entry })
+        const output = await bundle.generate(CONFIG)
+
+        ROLLUP_CACHE[entry] = bundle
+        ctx.body = output.code + '\n//# sourceMappingURL=' + output.map.toUrl()
+      } catch (error) {
+        ctx.body = `Rollup error:\n${error.stack}`
+      }
     }
   })
 }
