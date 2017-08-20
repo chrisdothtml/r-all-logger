@@ -36,8 +36,8 @@ export default async function getPosts () {
       credentials: 'same-origin'
     })
 
-    setCache(result)
     result = await response.json()
+    setCache(result)
   }
 
   return result
