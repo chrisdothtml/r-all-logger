@@ -1,10 +1,11 @@
-const FIELDS = [
-  '_id',
-  'createdAt',
-  'post_created_utc',
-  'post_num_comments',
-  'post_score',
-  'post_subreddit'
+const WEEK_DAYS = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
 ]
 
 function createAndDownload (filename, content) {
@@ -16,16 +17,36 @@ function createAndDownload (filename, content) {
   el.click()
 }
 
+// TODO: cleanup...
 export default function exportPosts (posts) {
+  const standardFields = ['post_num_comments', 'post_score', 'post_subreddit']
   const timestamp = new Date().getTime()
-  let result = FIELDS.join(',')
+  let columns = ''
 
-  posts.forEach(post => {
-    const values = []
+  posts = posts
+    .map(post => {
+      const createdDate = new Date(post.post_created_utc * 1000)
+      const newPost = {
+        post_day: WEEK_DAYS[createdDate.getDay()],
+        post_hour: createdDate.getHours()
+      }
 
-    FIELDS.forEach(field => values.push(post[field]))
-    result += '\n' + values.join(',')
-  })
+      standardFields.forEach(field => (newPost[field] = post[field]))
+      return newPost
+    })
+    .map(post => {
+      const keys = Object.keys(post).sort()
 
-  createAndDownload(`posts-${timestamp}.csv`, result)
+      if (!columns) {
+        // add column labels
+        columns = keys.join(',') + '\n'
+      }
+
+      return keys
+        .map(key => post[key])
+        .join(',')
+    })
+    .join('\n')
+
+  createAndDownload(`posts-${timestamp}.csv`, columns + posts)
 }
