@@ -1,3 +1,11 @@
+NODE_ENV=development
+PORT=
+MONGODB_URI=
+
+# basic auth only for production
+AUTH_USER=
+AUTH_PASS=
+
 # reddit api
 CLIENT_ID=
 CLIENT_SECRET=
