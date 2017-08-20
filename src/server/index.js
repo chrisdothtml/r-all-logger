@@ -2,6 +2,7 @@ import env from '../env.js'
 import Koa from 'koa'
 import mongoose from 'mongoose'
 import mwAuth from './middleware/auth.js'
+import mwRollup from './middleware/rollup.js'
 import router from 'koa-route'
 import serve from 'koa-static'
 import { getPosts } from './api.js'
@@ -21,6 +22,7 @@ server.use(
   })
 )
 
+server.use(mwRollup(PUBLIC_PATH))
 server.use(serve(PUBLIC_PATH))
 
 mongoose.connect(MONGODB_URI)
