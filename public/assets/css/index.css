@@ -1,6 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:400,500,700';
 @import './vars.css';
 @import './reset.css';
+@import './elements/loading-overlay.css';
 @import './elements/header.css';
 @import './elements/card.css';
 

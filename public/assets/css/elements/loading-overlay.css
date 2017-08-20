@@ -1,0 +1,45 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+.loading-overlay {
+  align-items: center;
+  background-color: var(--color-bg);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition-duration: var(--speed-slow);
+  transition-property: opacity, z-index;
+  width: 100%;
+  z-index: -1;
+}
+
+.loading-overlay:before {
+  --size: 60px;
+  animation: spin var(--speed-slow) infinite linear;
+  border: calc(var(--size) * .2) double rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border-top-color: rgba(0, 0, 0, 0.8);
+  content: '';
+  height: var(--size);
+  width: var(--size);
+}
+
+body.loading .loading-overlay {
+  opacity: 1;
+  z-index: var(--z-loading);
+}

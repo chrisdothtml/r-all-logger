@@ -4,4 +4,6 @@
   --color-text-secondary: #6c8c9c;
   --color-green: #27ae60;
   --speed-normal: .2s;
+  --speed-slow: .5s;
+  --z-loading: 100;
 }
