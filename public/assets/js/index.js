@@ -11,7 +11,7 @@ const componentElements = {
 function init () {
   return Promise.all(
     keys(components).map(async name => {
-      components[name].init(
+      return components[name].init(
         componentElements[name]
       )
     })
